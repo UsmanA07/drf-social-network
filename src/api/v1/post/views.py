@@ -18,7 +18,7 @@ class PostListView(APIView):
 
 
 class PostDetailView(APIView):
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get(self, pk):
         serializer = PostDetailSerializers(post_detail(pk))

@@ -5,6 +5,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+app_name = 'post'
 
 urlpatterns = [
     path('', PostListView.as_view()),

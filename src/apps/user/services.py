@@ -5,15 +5,13 @@ def get_path_upload_avatar(instance, file):
     return f'avatar/{instance.id}/{file}'
 
 
-def validated_size_avatar(file_obj):
+def validate_size_avatar(file_obj):
     limit_size_mb = 2
     if file_obj.size > limit_size_mb * 1024 * 1024:
         raise ValidationError(f'Max size file: {limit_size_mb}')
 
 
-def validated_phone_number(num: int):
-    if str(num)[0] == '1':
-        print('validated')
-    else:
-        print('not validated')
-    print(num)
+def validate_phone_number(num: str):
+    if (num[0] == '8' or num[0:1] == '+7') and (num.isdigit()):
+        raise ValidationError('incorrect phone number')
+

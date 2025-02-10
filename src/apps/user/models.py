@@ -11,12 +11,6 @@ from apps.user.services import (
 
 
 class ProfileUser(AbstractUser):
-    # Изменения:
-    # 1. Переименовали класс в User для ясности
-    # 2. Заменили IntegerField на CharField для номера телефона
-    # 3. Добавили больше валидаторов
-    # 4. Улучшили структуру и читаемость
-
     username = models.CharField(
         _('username'),
         max_length=150,
@@ -59,7 +53,6 @@ class ProfileUser(AbstractUser):
         help_text=_('Upload your profile picture. Allowed formats: JPG, JPEG, PNG. Max size: 2MB.')
     )
 
-    # Добавляем дополнительные поля
     date_of_birth = models.DateField(
         _('date of birth'),
         blank=True,
@@ -81,10 +74,9 @@ class ProfileUser(AbstractUser):
         ordering = ['-date_joined']
 
     def __str__(self):
-        return self.username  # Более логичное отображение
+        return self.username
 
     def save(self, *args, **kwargs):
-        # Очистка номера телефона перед сохранением
         if self.phone:
             self.phone = self.phone.strip().replace(' ', '')
         super().save(*args, **kwargs)

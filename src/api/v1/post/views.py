@@ -6,7 +6,7 @@ from apps.post.services import post_list, post_create, post_detail, post_delete,
 
 
 class PostListView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     def get(self, request):
         serializer = PostListSerializer(post_list(), many=True)

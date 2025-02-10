@@ -20,6 +20,8 @@ ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
+    'drf_spectacular',
+    # 'django-rest-swagger',
     'rest_framework',
     'rest_framework_simplejwt',
     'django.contrib.admin',
@@ -28,7 +30,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djoser',
 
     'apps.post.apps.PostConfig',
     'apps.account.apps.AccountConfig',
@@ -123,6 +124,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     # 'DEFAULT_PERMISSION_CLASSES': [
     #     'rest_framework.permissions.IsAuthenticated',
     # ],
@@ -137,10 +139,10 @@ SIMPLE_JWT = {
     'USER_ID_CLAIM': 'user_id',
 }
 
-DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': '#/activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': False,
-    'SERIALIZERS': {},
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Django5 Test Swagger API',
+    'DESCRIPTION': 'Django5 Test Swagger API description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
 }

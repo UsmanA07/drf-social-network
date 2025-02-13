@@ -3,7 +3,7 @@ from django.core.validators import FileExtensionValidator, MinLengthValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from apps.user.services import (
+from apps.user.services.model_services import (
     get_path_upload_avatar,
     validate_size_avatar,
     validate_phone_number

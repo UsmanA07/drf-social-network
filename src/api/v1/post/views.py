@@ -4,6 +4,10 @@ from rest_framework.response import Response
 from api.v1.post.serializers import *
 from apps.post.services import post_list, post_create, post_detail, post_delete, post_update
 
+from django.contrib.auth import get_user_model
+
+from apps.user.models import ProfileUser
+
 
 class PostListView(APIView):
     permission_classes = [permissions.AllowAny]
@@ -18,9 +22,9 @@ class PostListView(APIView):
 
 
 class PostDetailView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
-    def get(self, pk):
+    def get(self, request, pk):
         serializer = PostDetailSerializers(post_detail(pk))
         return Response(serializer.data)
 

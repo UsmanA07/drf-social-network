@@ -7,15 +7,15 @@ def post_list():
     return Post.objects.all()
 
 
-def post_create(request, **kwargs):
+def post_create(request):
     print(request)
-    task = PostCreateSerializer(data=request.data)
-    print(task, 'task')
-    if task.is_valid():
-        return task.save(user=request.user)
+    post = PostCreateSerializer(data=request.data)
+    print(post, 'post')
+    if post.is_valid():
+        return post.save(user=request.user)
 
 
-def post_detail(pk: int, **kwargs):
+def post_detail(pk: int):
     return Post.objects.get(pk=pk)
 
 

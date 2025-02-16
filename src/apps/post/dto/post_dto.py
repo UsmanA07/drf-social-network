@@ -8,3 +8,19 @@ class PostListDTO:
     title: str
     text: str
     published: str
+
+
+@dataclass
+class PostCreateDTO:
+    title: str
+    text: str
+    user: str
+
+
+@dataclass
+class PostDetailDTO:
+    id: int
+    user: str
+    title: str
+    text: str
+    published: str

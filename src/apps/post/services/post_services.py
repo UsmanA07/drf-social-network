@@ -1,4 +1,4 @@
-from apps.post.dto.post_dto import PostListDTO
+from apps.post.dto.post_dto import PostCreateDTO
 
 from apps.post.repository.post_repositories import PostRepository
 
@@ -6,33 +6,12 @@ from apps.post.repository.post_repositories import PostRepository
 class PostServices:
     def __init__(self):
         self.repository = PostRepository()
-        print(f'init: {self.repository}')
 
     def post_list(self):
-        print(f'post_list: {self.repository}')
-        print(f'post_list: {self.repository.all_post()}')
-        return self.repository.all_post()
+        return self.repository.get_all()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def post_create(self, post_dto: PostCreateDTO):
+        return self.repository.post_create(post_dto)
 
 
 

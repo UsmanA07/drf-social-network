@@ -1,11 +1,10 @@
-from apps.post.dto.post_dto import PostListDTO
+from apps.post.dto.post_dto import PostListDTO, PostCreateDTO
 from apps.post.models import Post
 
 
 class PostRepository:
-    def all_post(self):
+    def get_all(self):
         posts = Post.objects.all()
-        # print([post for post in posts])
         return [
             PostListDTO(
                 id=post.id,
@@ -16,3 +15,16 @@ class PostRepository:
             )
             for post in posts
         ]
+
+    def post_create(self, post_dto: PostCreateDTO):
+        post = Post.objects.create(
+            user=post_dto.user,
+            title=post_dto.title,
+            text=post_dto.text
+        )
+
+        return PostCreateDTO(
+            title=post.title,
+            text=post.text,
+            user=post.user
+        )

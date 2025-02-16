@@ -9,7 +9,7 @@ app_name = 'post'
 
 urlpatterns = [
     path('', PostListView.as_view()),
-    path('post-detail/<int:pk>', PostDetailView.as_view()),
+    path('post-detail/<int:id>', PostDetailView.as_view()),
 
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

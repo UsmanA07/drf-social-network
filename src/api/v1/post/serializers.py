@@ -17,7 +17,7 @@ class PostCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        exclude = ('like',)
+        fields = ['title', 'text', 'user']
 
 
 class PostDetailSerializers(serializers.ModelSerializer):

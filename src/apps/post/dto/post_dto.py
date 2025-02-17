@@ -24,3 +24,9 @@ class PostDetailDTO:
     title: str
     text: str
     published: str
+
+
+@dataclass
+class PostUpdateDTO:
+    title: str
+    text: str

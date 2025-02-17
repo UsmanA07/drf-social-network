@@ -14,8 +14,15 @@ class PostServices:
         return self.repository.post_create(post_dto)
 
     def post_detail(self, post_id: int):
-        print(f'this is services: {self.repository.get_by_id(post_id)}\n\n')
+        # print(f'this is services: {self.repository.get_by_id(post_id)}\n\n')
         return self.repository.get_by_id(post_id)
+
+    def post_delete(self, post_id: int) -> bool:
+        return self.repository.delete_by_id(post_id)
+
+    def post_update(self, post_id: int, post_dto):
+        print(f'this is services: {self.repository.update_by_id(post_id, post_dto)}\n\n')
+        return self.repository.update_by_id(post_id, post_dto)
 
 
 

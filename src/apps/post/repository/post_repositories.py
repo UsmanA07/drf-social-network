@@ -1,4 +1,4 @@
-from apps.post.dto.post_dto import PostListDTO, PostCreateDTO, PostDetailDTO
+from apps.post.dto.post_dto import PostListDTO, PostCreateDTO, PostDetailDTO, PostUpdateDTO
 from apps.post.models import Post
 
 
@@ -31,14 +31,6 @@ class PostRepository:
 
     def get_by_id(self, post_id: int):
         post = Post.objects.get(id=post_id)
-        print(f'this is repository: {post}\n\n')
-        print(f'this is repository dto: {PostDetailDTO(
-            id=post.id,
-            user=post.user,
-            title=post.title,
-            text=post.text,
-            published=post.published
-        )}\n\n')
 
         return PostDetailDTO(
             id=post.id,
@@ -47,3 +39,25 @@ class PostRepository:
             text=post.text,
             published=post.published
         )
+
+    def delete_by_id(self, post_id: int):
+        try:
+            post = Post.objects.get(id=post_id)
+            post.delete()
+            return True
+        except Post.DoesNotExist:
+            return False
+
+    def update_by_id(self, post_id: int, post_dto):
+        try:
+            post = Post.objects.get(id=post_id)
+            post.title = post_dto.title
+            post.text = post_dto.text
+            print(post, post.title)
+            post.save()
+            return PostUpdateDTO(
+                title=post.title,
+                text=post.text
+            )
+        except Post.DoesNotExist:
+            return None

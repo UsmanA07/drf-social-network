@@ -1,4 +1,4 @@
-from apps.post.dto.post_dto import PostCreateDTO
+from apps.post.dto.post_dto import PostCreateDTO, PostDetailDTO
 
 from apps.post.repository.post_repositories import PostRepository
 
@@ -12,6 +12,10 @@ class PostServices:
 
     def post_create(self, post_dto: PostCreateDTO):
         return self.repository.post_create(post_dto)
+
+    def post_detail(self, post_id: int):
+        print(f'this is services: {self.repository.get_by_id(post_id)}\n\n')
+        return self.repository.get_by_id(post_id)
 
 
 

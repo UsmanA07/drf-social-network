@@ -1,4 +1,4 @@
-from apps.post.dto.post_dto import PostListDTO, PostCreateDTO
+from apps.post.dto.post_dto import PostListDTO, PostCreateDTO, PostDetailDTO
 from apps.post.models import Post
 
 
@@ -27,4 +27,23 @@ class PostRepository:
             title=post.title,
             text=post.text,
             user=post.user
+        )
+
+    def get_by_id(self, post_id: int):
+        post = Post.objects.get(id=post_id)
+        print(f'this is repository: {post}\n\n')
+        print(f'this is repository dto: {PostDetailDTO(
+            id=post.id,
+            user=post.user,
+            title=post.title,
+            text=post.text,
+            published=post.published
+        )}\n\n')
+
+        return PostDetailDTO(
+            id=post.id,
+            user=post.user,
+            title=post.title,
+            text=post.text,
+            published=post.published
         )

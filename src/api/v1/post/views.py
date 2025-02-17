@@ -2,7 +2,7 @@ from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.v1.post.serializers import *
-from apps.post.dto.post_dto import PostCreateDTO
+from apps.post.dto.post_dto import PostCreateDTO, PostDetailDTO
 from apps.post.services.post_services import PostServices
 
 from django.contrib.auth import get_user_model
@@ -36,10 +36,11 @@ class PostListView(APIView):
 class PostDetailView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
-    def get(self, request, id):
+    def get(self, request, post_id):
         post_services = PostServices()
-        post = post_services.post_list()
+        post = post_services.post_detail(post_id)
         serializer = PostDetailSerializers(post)
+        print(f'this is serializer: {serializer}\n\n')
         return Response(serializer.data)
 
     def delete(self, pk):

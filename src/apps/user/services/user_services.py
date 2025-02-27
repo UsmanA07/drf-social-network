@@ -1,8 +1,8 @@
-from api.v1.user.serializers import UserRegisterSerializer
-# from apps.user.models import ProfileUser
+from apps.user.dto.user_dto import UserRegisterDTO
 
 
-def user_register(request):
-    user = UserRegisterSerializer(data=request.data)
-    if user.is_valid():
-        return user.save()
+class UserRegister:
+    def __init__(self, repository):
+        self.repository = repository
+    def execute(self, user_dto: UserRegisterDTO):
+        return self.repository.user_register(user_dto)

@@ -3,7 +3,7 @@ from rest_framework import serializers
 from apps.user.models import ProfileUser
 
 
-class UserAllSerializer(serializers.ModelSerializer):
+class UserMeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProfileUser
         # print(f' This is user auth\t{AUTH_USER_MODEL}')
@@ -13,4 +13,4 @@ class UserAllSerializer(serializers.ModelSerializer):
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProfileUser
-        fields = '__all__'
+        fields = ('last_name', 'first_name', 'password', 'username', 'phone', 'email')

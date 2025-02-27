@@ -12,5 +12,5 @@ def validate_size_avatar(file_obj):
 
 
 def validate_phone_number(num: str):
-    if (num[0] == '8' or num[0:1] == '+7') and (num.isdigit()):
-        raise ValidationError('incorrect phone number')
+    if not ((num[0] == '8' or num[0:1] == '+7') and (num.isdigit())):
+        raise ValidationError(f'incorrect phone number {num}')

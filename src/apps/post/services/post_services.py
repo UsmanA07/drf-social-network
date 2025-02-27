@@ -1,11 +1,10 @@
-from apps.post.dto.post_dto import PostCreateDTO, PostDetailDTO
+from apps.post.dto.post_dto import PostCreateDTO
 
-from apps.post.repository.post_repositories import PostRepository
 
 
 class PostServices:
-    def __init__(self):
-        self.repository = PostRepository()
+    def __init__(self, repository):
+        self.repository = repository
 
     def post_list(self):
         return self.repository.get_all()
@@ -14,41 +13,10 @@ class PostServices:
         return self.repository.post_create(post_dto)
 
     def post_detail(self, post_id: int):
-        # print(f'this is services: {self.repository.get_by_id(post_id)}\n\n')
         return self.repository.get_by_id(post_id)
 
     def post_delete(self, post_id: int) -> bool:
         return self.repository.delete_by_id(post_id)
 
     def post_update(self, post_id: int, post_dto):
-        print(f'this is services: {self.repository.update_by_id(post_id, post_dto)}\n\n')
         return self.repository.update_by_id(post_id, post_dto)
-
-
-
-
-
-
-# def post_create(request):
-#     print(request)
-#     post = PostCreateSerializer(data=request.data)
-#     print(post, 'post')
-#     if post.is_valid():
-#         return post.save(user=request.user)
-#
-#
-# def post_detail(pk: int):
-#     return Post.objects.get(pk=pk)
-#
-#
-# def post_delete(pk: int):
-#     post = Post.objects.get(pk=pk)
-#     post.delete()
-#
-#
-# def post_update(pk: int, request):
-#     post = Post.objects.get(pk=pk)
-#     serializer = PostUpdateSerializers(post, data=request.data)
-#     if serializer.is_valid():
-#         serializer.validated_data['published'] = datetime.now()
-#         serializer.save()

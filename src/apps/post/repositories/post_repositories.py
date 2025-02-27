@@ -30,9 +30,8 @@ class DjangoPostRepository(PostRepository):
     def update_by_id(self, post_id: int, post_dto):
         try:
             post = Post.objects.get(id=post_id)
-            post.title = post_dto.title
-            post.text = post_dto.text
-            print(post, post.title)
+            if post_dto.title is not None: post.title = post_dto.title
+            if post_dto.text is not None: post.text = post_dto.text
             post.save()
             return PostUpdateDTO(
                 title=post.title,

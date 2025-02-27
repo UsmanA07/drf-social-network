@@ -33,6 +33,10 @@ class PostUpdateSerializers(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
+        extra_kwargs = {
+            'title': {'required': False},
+            'text': {'required': False},
+        }
 
 
 class PostDeleteSerializers(serializers.ModelSerializer):

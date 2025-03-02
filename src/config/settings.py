@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure-if893pf70k-!=fg*$5$4k*3l#+e!*ubu3q^zwmm8zt+1em4^4+
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'drf_spectacular',
@@ -57,10 +57,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+  'default': {
+      'ENGINE': 'django.db.backends.postgresql_psycopg2',
+      'NAME': 'socnetwork',
+      'USER': 'adminuser',
+      'PASSWORD': 'password',
+      'HOST': 'db',
+      'PORT': '5432',
+  }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -86,6 +90,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = 'static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -121,6 +126,6 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
 }
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000"
+# ]

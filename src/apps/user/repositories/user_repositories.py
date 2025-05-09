@@ -6,7 +6,7 @@ from apps.user.models import ProfileUser
 
 class UserRepository(ABC):
     @abstractmethod
-    def user_register(self, user_dto: UserRegisterDTO):
+    def user_register(self, user_dto: UserRegisterDTO) -> UserRegisterDTO:
         pass
 
 
@@ -18,7 +18,7 @@ class DjangoUserRepository(UserRepository):
             last_name=user_dto.last_name,
             phone=user_dto.phone,
             email=user_dto.email,
-            password=user_dto.password
+            password=user_dto.password,
         )
         return UserRegisterDTO(
             username=user.username,
@@ -26,5 +26,5 @@ class DjangoUserRepository(UserRepository):
             last_name=user.last_name,
             phone=user.phone,
             email=user.email,
-            password=user.password
+            password=user.password,
         )

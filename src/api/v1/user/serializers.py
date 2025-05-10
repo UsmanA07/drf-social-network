@@ -6,7 +6,6 @@ from apps.user.models import ProfileUser
 class UserMeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProfileUser
-        # print(f' This is user auth\t{AUTH_USER_MODEL}')
         fields = '__all__'
 
 

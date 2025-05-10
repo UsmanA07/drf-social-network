@@ -1,7 +1,7 @@
 from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from api.v1.post.serializers import *
+from apps.post.serializers import *
 from apps.post.dto.post_dto import PostCreateDTO, PostUpdateDTO
 from apps.post.services.post_services import PostServices
 from apps.post.repositories.post_repositories import DjangoPostRepository
@@ -58,10 +58,10 @@ class PostDetailView(APIView):
         if not serializer.is_valid():
             return Response(serializer.errors, status=400)
 
-        # print(serializer.validated_data['text'])
         post_dto = PostUpdateDTO(
             title=serializer.validated_data.get('title'),
             text=serializer.validated_data.get('text'),
+            
         )
         # post_dto = PostUpdateDTO(**serializer.data)
         post_services = PostServices(DjangoPostRepository())

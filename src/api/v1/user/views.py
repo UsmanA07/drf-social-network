@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import permissions
 
-from api.v1.user.serializers import UserMeSerializer, UserRegisterSerializer
+from apps.user.serializers import UserMeSerializer, UserRegisterSerializer
 from apps.user.dto.user_dto import UserRegisterDTO
 from apps.user.models import ProfileUser
 from apps.user.repositories.user_repositories import DjangoUserRepository

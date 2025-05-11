@@ -62,7 +62,7 @@ DATABASES = {
       'NAME': 'socnetwork',
       'USER': 'adminuser',
       'PASSWORD': 'password',
-      'HOST': 'db',
+      'HOST': 'localhost',
       'PORT': '5432',
   }
 }

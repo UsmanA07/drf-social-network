@@ -12,7 +12,7 @@ class UserRepository(ABC):
 
 class DjangoUserRepository(UserRepository):
     def user_register(self, user_dto: UserRegisterDTO):
-        user = ProfileUser.objects.create(
+        user = ProfileUser.objects.create_user(
             username=user_dto.username,
             first_name=user_dto.first_name,
             last_name=user_dto.last_name,

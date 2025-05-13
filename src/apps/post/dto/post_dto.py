@@ -28,5 +28,5 @@ class PostDetailDTO:
 
 @dataclass
 class PostUpdateDTO:
-    title: str
-    text: str
+    title: str | None
+    text: str | None

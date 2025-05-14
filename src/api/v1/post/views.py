@@ -1,6 +1,7 @@
 from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
 from apps.post.serializers import *
 from apps.post.dto.post_dto import PostCreateDTO, PostUpdateDTO
 from apps.post.services.post_services import PostServices
@@ -9,7 +10,7 @@ from apps.post.repositories.post_repositories import DjangoPostRepository
 
 # noinspection PyUnusedLocal
 class PostListView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     @staticmethod
     def get(request):
@@ -63,7 +64,6 @@ class PostDetailView(APIView):
             text=serializer.validated_data.get('text'),
             
         )
-        # post_dto = PostUpdateDTO(**serializer.data)
         post_services = PostServices(DjangoPostRepository())
         post_services.post_update(post_id, post_dto)
 

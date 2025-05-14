@@ -2,7 +2,6 @@ from unittest.mock import MagicMock
 
 import pytest
 from rest_framework.test import APIClient
-from django.contrib.auth import get_user_model
 
 from apps.post.models import Post
 from apps.post.services.post_services import PostServices

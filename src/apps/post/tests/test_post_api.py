@@ -22,7 +22,7 @@ def test_get_post_list(user):
 def test_create_post(user):
     factory = APIRequestFactory()
     view = PostListView.as_view()
-    data = {"title": "Test Title", "text": "Test text content"}
+    data = {'title': 'Test Title', 'text': 'Test text content'}
     request = factory.post('/api/v1/posts/', data, format='json')
     force_authenticate(request, user=user)
 
@@ -56,6 +56,6 @@ def test_delete_nonexistent_post(client):
 @pytest.mark.django_db
 def test_patch_post(client, post):
     url = f"/api/v1/post-detail/{post.id}"
-    data = {"title": "Updated Title"}
+    data = {'title': 'Updated Title'}
     response = client.patch(url, data)
     assert response.status_code == 203

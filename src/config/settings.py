@@ -23,6 +23,7 @@ INSTALLED_APPS = [
 
     'apps.post.apps.PostConfig',
     'apps.user.apps.UserConfig',
+    'apps.comment.apps.CommentConfig',
 ]
 
 MIDDLEWARE = [
@@ -57,14 +58,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
-  'default': {
-      'ENGINE': 'django.db.backends.postgresql_psycopg2',
-      'NAME': 'socnetwork',
-      'USER': 'adminuser',
-      'PASSWORD': 'password',
-      'HOST': 'localhost',
-      'PORT': '5432',
-  }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'socnetwork',
+        'USER': 'adminuser',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -121,7 +122,7 @@ SIMPLE_JWT = {
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Django5 Test Swagger API',
-    'DESCRIPTION': 'Django5 Test Swagger API description',
+    'DESCRIPTION': 'Django-5 Test Swagger API description',
     'VERSION': '1.0.1',
     'SERVE_INCLUDE_SCHEMA': False,
 }

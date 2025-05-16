@@ -223,6 +223,17 @@ files = [
 ]
 
 [[package]]
+name = "permission"
+version = "0.4.1"
+description = "Simple and flexible permission control for Flask app."
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "permission-0.4.1.tar.gz", hash = "sha256:f2cd126123fb9f3f4f80a9640cf3aea688b06701525e02c25aa17221c0d871c8"},
+]
+
+[[package]]
 name = "pillow"
 version = "11.1.0"
 description = "Python Imaging Library (Fork)"
@@ -719,4 +730,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13"
-content-hash = "08b6f6ea98a49338668ad77a5c3a67f1818d94f8bc19790feb3b28b0dddfd364"
+content-hash = "a89431b6c9c6861d813ae6553e42204a6cd742bf44c6e67478c76e87f779cadb"

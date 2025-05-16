@@ -11,11 +11,11 @@ from drf_spectacular.views import (
 
 urlpatterns = [
     path('api/v1/', include('apps.post.urls')),
+    path('api/v1/', include('apps.comment.urls')),
     path('auth/', include('apps.user.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path("admin/", admin.site.urls),
 
-    # Optional UI:
     path(
         'api/schema/swagger-ui/',
         SpectacularSwaggerView.as_view(url_name='schema'),

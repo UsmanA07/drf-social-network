@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from apps.comment.serializers import CommentListSerializer
 from apps.post.models import Post
 
 
@@ -21,10 +22,11 @@ class PostCreateSerializer(serializers.ModelSerializer):
 
 class PostDetailSerializers(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
+    comments = CommentListSerializer(source='posts_comment', many=True, read_only=True)
 
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['id', 'user', 'title', 'text', 'published', 'comments']
 
 
 class PostUpdateSerializers(serializers.ModelSerializer):

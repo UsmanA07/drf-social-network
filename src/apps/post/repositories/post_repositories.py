@@ -69,6 +69,7 @@ class ImplPostRepository(PostRepository):
             title=post.title,
             text=post.text,
             published=post.published,
+            posts_comment=post.posts_comment
         )
 
     def get_all(self):

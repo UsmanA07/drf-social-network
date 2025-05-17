@@ -24,6 +24,7 @@ class PostDetailDTO:
     title: str
     text: str
     published: str
+    posts_comment: str
 
 
 @dataclass

@@ -11,7 +11,7 @@ class CommentRepository(ABC):
         pass
 
 
-class DjangoCommentRepository(CommentRepository):
+class ImplCommentRepository(CommentRepository):
     def get_all(self, post_id):
         post1 = Post.objects.get(pk=post_id)
         comments = Comment.objects.filter(post=post_id)

@@ -10,7 +10,7 @@ class UserRepository(ABC):
         pass
 
 
-class DjangoUserRepository(UserRepository):
+class ImplUserRepository(UserRepository):
     def user_register(self, user_dto: UserRegisterDTO):
         user = ProfileUser.objects.create_user(
             username=user_dto.username,

@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from apps.post.serializers import *
 from apps.post.dto.post_dto import PostCreateDTO, PostUpdateDTO
 from apps.post.services.post_services import PostServices
-from apps.post.repositories.post_repositories import DjangoPostRepository
+from apps.post.repositories.post_repositories import ImplPostRepository
 
 
 # noinspection PyUnusedLocal
@@ -14,7 +14,7 @@ class PostListView(APIView):
 
     @staticmethod
     def get(request):
-        post_services = PostServices(DjangoPostRepository())
+        post_services = PostServices(ImplPostRepository())
         posts = post_services.post_list()
         serializer = PostListSerializer(posts, many=True)
         return Response(serializer.data)
@@ -29,7 +29,7 @@ class PostListView(APIView):
             title=serializer.validated_data['title'],
             text=serializer.validated_data['text'],
         )
-        post_services = PostServices(DjangoPostRepository())
+        post_services = PostServices(ImplPostRepository())
         post_services.post_create(post_dto)
         return Response(status=201)
 
@@ -40,14 +40,14 @@ class PostDetailView(APIView):
 
     @staticmethod
     def get(request, post_id):
-        post_services = PostServices(DjangoPostRepository())
+        post_services = PostServices(ImplPostRepository())
         post = post_services.post_detail(post_id)
         serializer = PostDetailSerializers(post)
         return Response(serializer.data)
 
     @staticmethod
     def delete(request, post_id):
-        post_services = PostServices(DjangoPostRepository())
+        post_services = PostServices(ImplPostRepository())
         post = post_services.post_delete(post_id)
         if not post:
             return Response(status=404)
@@ -64,7 +64,7 @@ class PostDetailView(APIView):
             text=serializer.validated_data.get('text'),
             
         )
-        post_services = PostServices(DjangoPostRepository())
+        post_services = PostServices(ImplPostRepository())
         post_services.post_update(post_id, post_dto)
 
         return Response(status=203)

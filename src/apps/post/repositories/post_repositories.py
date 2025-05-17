@@ -32,7 +32,7 @@ class PostRepository(ABC):
         pass
 
 
-class DjangoPostRepository(PostRepository):
+class ImplPostRepository(PostRepository):
     def update_by_id(self, post_id: int, post_dto):
         try:
             post = Post.objects.get(id=post_id)

@@ -5,7 +5,7 @@ from rest_framework import permissions
 from apps.user.serializers import UserMeSerializer, UserRegisterSerializer
 from apps.user.dto.user_dto import UserRegisterDTO
 from apps.user.models import ProfileUser
-from apps.user.repositories.user_repositories import DjangoUserRepository
+from apps.user.repositories.user_repositories import ImplUserRepository
 from apps.user.services.user_services import UserRegister
 
 
@@ -26,6 +26,6 @@ class UserRegisterView(APIView):
             email=serializer.validated_data['email'],
             password=serializer.validated_data['password'],
         )
-        user_register = UserRegister(DjangoUserRepository())
+        user_register = UserRegister(ImplUserRepository())
         user_register.execute(user_dto)
         return Response(status=201)

@@ -1,9 +1,9 @@
 import pytest
 
-from apps.post.repositories.post_repositories import DjangoPostRepository
+from apps.post.repositories.post_repositories import ImplPostRepository
 from apps.user.dto.user_dto import UserRegisterDTO
 from apps.user.models import ProfileUser
-from apps.user.repositories.user_repositories import DjangoUserRepository
+from apps.user.repositories.user_repositories import ImplUserRepository
 
 
 @pytest.mark.django_db
@@ -15,7 +15,7 @@ def test_user_register():
                           last_name=".",
                           phone="11111111111")
 
-    repo = DjangoUserRepository()
+    repo = ImplUserRepository()
     user = repo.user_register(dto)
 
     assert user.username == dto.username

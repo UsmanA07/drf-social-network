@@ -18,7 +18,7 @@ def test_get_all():
     Post.objects.create(id=1, user=user, title='t', text='tt', published='1')
     Post.objects.create(id=2, user=user, title='t1', text='tt1', published='2')
 
-    repo = DjangoPostRepository()
+    repo = ImplPostRepository()
     posts = repo.get_all()
 
     assert len(posts) == 2
@@ -37,7 +37,7 @@ def test_post_create():
         email="test@example.com",
         password="securepass"
     )
-    repo = DjangoPostRepository()
+    repo = ImplPostRepository()
     dto = PostCreateDTO(user=user, title='t', text='tt')
 
     post = repo.post_create(dto)
@@ -59,7 +59,7 @@ def test_post_get_by_id():
     )
     post = Post.objects.create(id=1, user=user, title='t', text='tt', published='1')
 
-    repo = DjangoPostRepository()
+    repo = ImplPostRepository()
     result = repo.get_by_id(post.id)
 
     assert result.title == "t"
@@ -77,7 +77,7 @@ def test_post_update_by_id():
     )
     post = Post.objects.create(id=1, user=user, title='t', text='tt', published='1')
 
-    repo = DjangoPostRepository()
+    repo = ImplPostRepository()
     update_dto = PostUpdateDTO(title='tu', text='ttu')
     updated_post = repo.update_by_id(post.id, update_dto)
 
@@ -97,7 +97,7 @@ def test_post_delete_by_id():
     )
     post = Post.objects.create(id=1, user=user, title='t', text='tt', published='1')
 
-    repo = DjangoPostRepository()
+    repo = ImplPostRepository()
     result = repo.delete_by_id(post.id)
 
     assert result is True

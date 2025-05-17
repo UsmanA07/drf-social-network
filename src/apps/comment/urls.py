@@ -7,3 +7,4 @@ app_name = 'comment'
 urlpatterns = [
     path('post/<int:post_id>/comments/', CommentListView.as_view()),
 ]
+2

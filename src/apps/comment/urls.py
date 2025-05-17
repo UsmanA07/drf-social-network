@@ -5,6 +5,5 @@ from api.v1.comment.views import CommentListView
 app_name = 'comment'
 
 urlpatterns = [
-    path('post/<int:post_id>/comments/', CommentListView.as_view()),
+    path('post/<int:post_id>/comments/', CommentListView.as_view(), name='comments-list'),
 ]
-2

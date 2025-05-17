@@ -13,13 +13,15 @@ from apps.comment.services.comment_services import CommentServices
 class CommentListView(APIView):
     permission_classes = [permissions.AllowAny]
 
-    def get(self, request, post_id):
+    @staticmethod
+    def get(request, post_id):
         comment_services = CommentServices(ImplCommentRepository())
         comments = comment_services.comment_list(post_id)
         serializers = CommentListSerializer(comments, many=True)
         return Response(serializers.data)
 
-    def post(self, request, post_id):
+    @staticmethod
+    def post(request, post_id):
         serializer = CommentCreateSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=400)

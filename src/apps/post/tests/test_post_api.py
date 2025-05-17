@@ -1,5 +1,4 @@
 import pytest
-from django.urls import reverse
 from rest_framework.test import APIRequestFactory, force_authenticate
 
 from api.v1.post.views import PostListView, PostDetailView
@@ -59,3 +58,7 @@ def test_patch_post(client, post):
     data = {'title': 'Updated Title'}
     response = client.patch(url, data)
     assert response.status_code == 203
+
+    post.refresh_from_db()
+    assert post.title == 'Updated Title'
+

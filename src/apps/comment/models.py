@@ -7,6 +7,7 @@ User = get_user_model()
 
 
 class Comment(models.Model):
+    objects = None
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

@@ -8,7 +8,7 @@ from apps.user.models import ProfileUser
 class CommentListDTO:
     id: int
     user: ProfileUser
-    post: str
+    post: Post
     text: str
     published: str
 
@@ -17,4 +17,18 @@ class CommentListDTO:
 class CommentCreateDTO:
     user: ProfileUser
     post: Post
+    text: str
+
+
+@dataclass
+class CommentDeleteDTO:
+    id: int
+    user: ProfileUser
+    post: Post
+    text: str
+    published: str
+
+
+@dataclass
+class CommentUpdateDTO:
     text: str

@@ -13,11 +13,23 @@ def test_get_comment(client, comment, post):
 
 @pytest.mark.django_db
 def test_create_comment(client, comment, post, user):
-    url = reverse('comment:comments-list', args=[post.id])
+    url = reverse('comment:comment-create', args=[post.id])
     data = {'text': 'cc', 'post': comment.post, 'user': comment.user}
     response = client.post(url, data)
 
-    print(response)
     assert response.status_code == 201
-
     assert comment.text == 'c'
+
+
+def test_delete_comment(client, comment, post, user):
+    url = reverse('comment:comment-delete', args=[comment.id])
+    response = client.delete(url)
+    assert response.status_code == 204
+
+@pytest.mark.django_db
+def test_update_comment(client, comment, post, user):
+    url = reverse('comment:comment-update', args=[comment.id])
+    data = {'text': 'cc'}
+    response = client.put(url, data)
+
+    assert response.status_code == 201

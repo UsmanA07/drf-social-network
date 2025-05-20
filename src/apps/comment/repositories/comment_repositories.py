@@ -22,6 +22,9 @@ class CommentRepository(ABC):
     def update_by_id(self, comment_id: int, comment_dto: CommentUpdateDTO) -> CommentUpdateDTO:
         pass
 
+    def get_by_id(self, comment_id: int) -> CommentDetailDTO:
+        pass
+
 
 class ImplCommentRepository(CommentRepository):
     def get_all(self, post_id):
@@ -56,6 +59,16 @@ class ImplCommentRepository(CommentRepository):
             comment.text = comment_dto.text
             comment.save()
             print(comment, 'repo')
-            return CommentUpdateDTO(text=comment.text)
+            return CommentUpdateDTO(text=comment.text, user=comment.user)
         except Post.DoesNotExist:
             return None
+
+    def get_by_id(self, comment_id: int) -> CommentDetailDTO:
+        comment = Comment.objects.get(id=comment_id)
+        return CommentDetailDTO(
+            id=comment.id,
+            user=comment.user,
+            text=comment.text,
+            published=comment.published,
+            post=comment.post
+        )

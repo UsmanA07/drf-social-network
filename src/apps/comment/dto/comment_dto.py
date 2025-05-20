@@ -16,7 +16,7 @@ class CommentListDTO:
 @dataclass
 class CommentCreateDTO:
     user: ProfileUser
-    post: Post
+    post: int
     text: str
 
 
@@ -32,3 +32,12 @@ class CommentDeleteDTO:
 @dataclass
 class CommentUpdateDTO:
     text: str
+    user: ProfileUser
+
+@dataclass
+class CommentDetailDTO:
+    id: int
+    user: ProfileUser
+    post: Post
+    text: str
+    published: str

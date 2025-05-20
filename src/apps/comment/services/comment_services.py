@@ -1,4 +1,4 @@
-from apps.comment.dto.comment_dto import CommentCreateDTO, CommentUpdateDTO
+from apps.comment.dto.comment_dto import CommentCreateDTO, CommentUpdateDTO, CommentDetailDTO
 
 
 class CommentServices:
@@ -15,5 +15,7 @@ class CommentServices:
         return self.repository.delete_by_id(comment_id)
 
     def comment_update(self, comment_id: int, comment_dto: CommentUpdateDTO) -> CommentUpdateDTO:
-        print(comment_dto, 'ser')
         return self.repository.update_by_id(comment_id, comment_dto)
+
+    def comment_detail(self, comment_id: int) -> CommentDetailDTO:
+        return self.repository.get_by_id(comment_id)

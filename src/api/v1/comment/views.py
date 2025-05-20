@@ -9,10 +9,11 @@ from apps.comment.serializers import CommentListSerializer, CommentCreateSeriali
 from apps.comment.services.comment_services import CommentServices
 from api.v1.permissions import IsOwnerOrReadOnly
 
+
 # noinspection PyUnusedLocal
 
 class ListCommentView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.AllowAny, IsOwnerOrReadOnly]
 
     @staticmethod
     def get(request, post_id: int):
@@ -23,10 +24,9 @@ class ListCommentView(APIView):
 
 
 class CommentCreateView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
 
-    @staticmethod
-    def post(request, post_id: int):
+    def post(self, request, post_id: int):
         serializer = CommentCreateSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=400)
@@ -41,26 +41,37 @@ class CommentCreateView(APIView):
 
 
 class CommentDeleteView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.AllowAny, IsOwnerOrReadOnly]
 
     def delete(self, request, comment_id: int):
+        comment_detail_services = CommentServices(ImplCommentRepository())
+        comment = comment_detail_services.comment_detail(comment_id)
+        self.check_object_permissions(request, comment)
+
         comment_services = CommentServices(ImplCommentRepository())
         comment = comment_services.comment_delete(comment_id)
+
         if not comment:
             return Response(status=404)
         return Response(status=204)
 
 
 class CommentUpdateView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.AllowAny, IsOwnerOrReadOnly]
 
-    @staticmethod
-    def put(request, comment_id: int):
+    def put(self, request, comment_id: int):
         serializer = CommentUpdateSerializer(data=request.data)
         comment_services = CommentServices(ImplCommentRepository())
+
+        comment_detail_services = CommentServices(ImplCommentRepository())
+        comment = comment_detail_services.comment_detail(comment_id)
+        self.check_object_permissions(request, comment)
+
         if not serializer.is_valid():
             return Response(serializer.errors, status=400)
-        comment_dto = CommentUpdateDTO(text=serializer.validated_data.get('text'))
+        comment_dto = CommentUpdateDTO(
+            text=serializer.validated_data.get('text'),
+            user=comment.user)
         comment = comment_services.comment_update(comment_id, comment_dto)
         if not comment:
             return Response(status=404)

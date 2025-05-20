@@ -78,7 +78,7 @@ def test_post_update_by_id():
     post = Post.objects.create(id=1, user=user, title='t', text='tt', published='1')
 
     repo = ImplPostRepository()
-    update_dto = PostUpdateDTO(title='tu', text='ttu')
+    update_dto = PostUpdateDTO(title='tu', text='ttu', user=user)
     updated_post = repo.update_by_id(post.id, update_dto)
 
     assert updated_post.title == "tu"

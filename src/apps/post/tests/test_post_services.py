@@ -26,7 +26,7 @@ def test_post_delete(service, mock_repo):
 
 def test_post_update(service, mock_repo):
     post_id = 1
-    dto = PostUpdateDTO(title="t", text=None)
+    dto = PostUpdateDTO(title="t", text=None, user='Usman')
     service.post_update(post_id, dto)
     mock_repo.update_by_id.assert_called_once_with(post_id, dto)
 

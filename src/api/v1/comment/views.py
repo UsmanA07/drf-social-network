@@ -7,10 +7,11 @@ from apps.comment.repositories.comment_repositories import ImplCommentRepository
 from apps.comment.serializers import CommentListSerializer, CommentCreateSerializer, \
     CommentUpdateSerializer
 from apps.comment.services.comment_services import CommentServices
-
+from api.v1.permissions import IsOwnerOrReadOnly
 
 # noinspection PyUnusedLocal
-class CommentView(APIView):
+
+class ListCommentView(APIView):
     permission_classes = [permissions.AllowAny]
 
     @staticmethod
@@ -22,7 +23,7 @@ class CommentView(APIView):
 
 
 class CommentCreateView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
     @staticmethod
     def post(request, post_id: int):
@@ -60,9 +61,7 @@ class CommentUpdateView(APIView):
         if not serializer.is_valid():
             return Response(serializer.errors, status=400)
         comment_dto = CommentUpdateDTO(text=serializer.validated_data.get('text'))
-        print(comment_dto, 'view0')
         comment = comment_services.comment_update(comment_id, comment_dto)
-        print(comment, 'view1')
         if not comment:
             return Response(status=404)
         return Response(status=201)

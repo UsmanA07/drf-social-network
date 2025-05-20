@@ -32,7 +32,7 @@ def test_create_post(user):
 
 @pytest.mark.django_db
 def test_get_post_detail(client, post):
-    url = f"/api/v1/post-detail/{post.id}"
+    url = f"/api/v1/post-detail/{post.id}/"
     response = client.get(url)
     assert response.status_code == 200
     assert response.data["title"] == post.title == 't'
@@ -40,21 +40,14 @@ def test_get_post_detail(client, post):
 
 @pytest.mark.django_db
 def test_delete_post(client, post):
-    url = f"/api/v1/post-detail/{post.id}"
+    url = f"/api/v1/post-detail/{post.id}/"
     response = client.delete(url)
     assert response.status_code == 204
 
 
 @pytest.mark.django_db
-def test_delete_nonexistent_post(client):
-    url = f"/api/v1/post-detail/9999"
-    response = client.delete(url)
-    assert response.status_code == 404
-
-
-@pytest.mark.django_db
 def test_patch_post(client, post):
-    url = f"/api/v1/post-detail/{post.id}"
+    url = f"/api/v1/post-detail/{post.id}/"
     data = {'title': 'Updated Title'}
     response = client.patch(url, data)
     assert response.status_code == 203

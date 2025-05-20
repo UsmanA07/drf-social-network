@@ -41,7 +41,7 @@ class ImplPostRepository(PostRepository):
             if post_dto.text is not None:
                 post.text = post_dto.text
             post.save()
-            return PostUpdateDTO(title=post.title, text=post.text)
+            return PostUpdateDTO(title=post.title, text=post.text, user=post_dto.user)
         except Post.DoesNotExist:
             return None
 

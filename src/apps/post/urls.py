@@ -5,5 +5,5 @@ app_name = 'post'
 
 urlpatterns = [
     path('', PostListView.as_view()),
-    path('post-detail/<int:post_id>', PostDetailView.as_view()),
+    path('post-detail/<int:post_id>/', PostDetailView.as_view(), name='post-detail'),
 ]

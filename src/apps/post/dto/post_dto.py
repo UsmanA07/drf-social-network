@@ -1,10 +1,12 @@
 from dataclasses import dataclass
 
+from apps.user.models import ProfileUser
+
 
 @dataclass
 class PostListDTO:
     id: int
-    user: str
+    user: ProfileUser
     title: str
     text: str
     published: str
@@ -14,20 +16,21 @@ class PostListDTO:
 class PostCreateDTO:
     title: str
     text: str
-    user: str
+    user: ProfileUser
 
 
 @dataclass
 class PostDetailDTO:
     id: int
-    user: str
+    user: ProfileUser
     title: str
     text: str
     published: str
-    posts_comment: str
+    posts_comment: list
 
 
 @dataclass
 class PostUpdateDTO:
     title: str | None
     text: str | None
+    user: ProfileUser

@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from apps.comment.services.model_services import str_mapping
 from apps.post.models import Post
 
 User = get_user_model()
@@ -30,7 +31,7 @@ class Comment(models.Model):
     )
 
     def __str__(self):
-        return f'{str(self.text).split()[0:3]}...'
+        return str_mapping(str(self.text))
 
     class Meta:
         verbose_name = 'Комментарий'

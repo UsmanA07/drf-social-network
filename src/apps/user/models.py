@@ -24,7 +24,7 @@ class ProfileUser(AbstractUser):
 
     phone = models.CharField(
         _('phone number'),
-        max_length=11,
+        max_length=12,
         blank=True,
         null=True,
         unique=True,

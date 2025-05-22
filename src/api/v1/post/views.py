@@ -37,7 +37,7 @@ class PostListView(APIView):
 
 # noinspection PyUnusedLocal
 class PostDetailView(APIView):
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [permissions.AllowAny, IsOwnerOrReadOnly]
 
     @staticmethod
     def get(request, post_id):
@@ -45,6 +45,11 @@ class PostDetailView(APIView):
         post = post_services.post_detail(post_id)
         serializer = PostDetailSerializers(post)
         return Response(serializer.data)
+
+    def post(self, request, post_id):
+        post_services = PostServices(ImplPostRepository())
+        post_services.post_like(post_id, request.user)
+        return Response(status=201)
 
     def delete(self, request, post_id):
         post_detail_services = PostServices(ImplPostRepository())

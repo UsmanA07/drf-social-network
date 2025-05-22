@@ -23,7 +23,7 @@ class PostRepository(ABC):
 
     @abstractmethod
     def update_by_id(
-        self, post_id: int, post_dto: PostUpdateDTO
+            self, post_id: int, post_dto: PostUpdateDTO
     ) -> PostUpdateDTO | None:
         pass
 
@@ -62,14 +62,15 @@ class ImplPostRepository(PostRepository):
 
     def get_by_id(self, post_id: int):
         post = Post.objects.get(id=post_id)
-
         return PostDetailDTO(
             id=post.id,
             user=post.user,
             title=post.title,
             text=post.text,
             published=post.published,
-            posts_comment=post.posts_comment
+            posts_comment=post.posts_comment,
+            like_count=post.like.all().count(),
+            like=post.like
         )
 
     def get_all(self):

@@ -1,7 +1,6 @@
 from apps.post.dto.post_dto import PostCreateDTO
 
 
-
 class PostServices:
     def __init__(self, repository):
         self.repository = repository
@@ -20,3 +19,12 @@ class PostServices:
 
     def post_update(self, post_id: int, post_dto):
         return self.repository.update_by_id(post_id, post_dto)
+
+    def post_like(self, post_id: int, user):
+        all_users_like = self.repository.get_by_id(post_id).like.all()
+        if user not in all_users_like:
+            self.repository.get_by_id(post_id).like.add(user)
+            return True
+        else:
+            self.repository.get_by_id(post_id).like.remove(user)
+            return False

@@ -27,6 +27,8 @@ class PostDetailDTO:
     text: str
     published: str
     posts_comment: list
+    like_count: int
+    like: list
 
 
 @dataclass

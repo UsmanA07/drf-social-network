@@ -5,6 +5,7 @@ User = get_user_model()
 
 
 class Post(models.Model):
+    objects = None
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -31,6 +32,7 @@ class Post(models.Model):
         verbose_name='Лайки'
     )
     like_count = models.IntegerField(blank=True, default=0)
+    views_count = models.IntegerField(blank=True, default=0)
 
     def __str__(self):
         return self.title

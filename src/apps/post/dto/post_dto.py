@@ -29,6 +29,7 @@ class PostDetailDTO:
     posts_comment: list
     like_count: int
     like: list
+    views_count: int
 
 
 @dataclass

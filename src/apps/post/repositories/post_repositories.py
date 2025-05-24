@@ -1,3 +1,5 @@
+import redis
+from django.conf import settings
 from apps.post.dto.post_dto import (
     PostListDTO,
     PostCreateDTO,
@@ -62,6 +64,11 @@ class ImplPostRepository(PostRepository):
 
     def get_by_id(self, post_id: int):
         post = Post.objects.get(id=post_id)
+        r = redis.Redis(host=settings.REDIS_HOST,
+                        port=settings.REDIS_PORT,
+                        db=settings.REDIS_DB)
+
+        total_views = r.incr(f'post:{post.id}:views')
         return PostDetailDTO(
             id=post.id,
             user=post.user,
@@ -70,7 +77,8 @@ class ImplPostRepository(PostRepository):
             published=post.published,
             posts_comment=post.posts_comment,
             like_count=post.like.all().count(),
-            like=post.like
+            like=post.like,
+            views_count=total_views,
         )
 
     def get_all(self):
